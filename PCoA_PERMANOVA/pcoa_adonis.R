@@ -75,8 +75,8 @@ dev.off()
 
 #interactions between province (t1) and other factors
 ado_R2_inter=matrix(nrow=77,ncol=6)
+m=1
 for (i in c(6,8:68,70,71,77:80,83:91)){
-  print(i)
   print(colnames(map1)[i])
   print(length(table(map1[,i])))
   #remove na rows
@@ -92,12 +92,12 @@ for (i in c(6,8:68,70,71,77:80,83:91)){
   }else{
     fit=adonis(tab_m ~ factor(map1[,i])*factor(map1$t1), permutations=999)
   }
-  ado_R2_inter[i-5,1]=fit$aov.tab[1,5]
-  ado_R2_inter[i-5,2]=fit$aov.tab[1,6]
-  ado_R2_inter[i-5,3]=fit$aov.tab[2,5]
-  ado_R2_inter[i-5,4]=fit$aov.tab[2,6]
-  ado_R2_inter[i-5,5]=fit$aov.tab[3,5]
-  ado_R2_inter[i-5,6]=fit$aov.tab[3,6]
+  ado_R2_inter[m,1]=fit$aov.tab[1,5]
+  ado_R2_inter[m,2]=fit$aov.tab[1,6]
+  ado_R2_inter[m,3]=fit$aov.tab[2,5]
+  ado_R2_inter[m,4]=fit$aov.tab[2,6]
+  ado_R2_inter[m,5]=fit$aov.tab[3,5]
+  ado_R2_inter[m,6]=fit$aov.tab[3,6]
 }
 rownames(ado_R2_inter)=colnames(map1)[c(6,8:68,70,71,77:80,83:91)]
 colnames(ado_R2_inter)=c("meta_R2","meta_p","t1_R2","t1_p","inter_R2","inter_p")
